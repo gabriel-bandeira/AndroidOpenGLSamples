@@ -84,12 +84,20 @@ public class Cube {
             "vec4(0.0f, 0.55f, 0.0f, 1.0); \n"
             + "}            \n";
 
+    private final String pointFragmentShader2 =
+            "precision mediump float;    \n"
+            + "void main()            \n"
+            + "{            \n"
+            + " gl_FragColor = "
+            + "vec4(0.0f, 0.0f, 1.0f, 1.0); \n"
+            + "}            \n";
+
     private final int mBytesPerFloat = 4;
     private FloatBuffer mCubePositions;
 
     private int mPerVertexProgramHandle;
 
-
+    private int mPerVertexProgramHandle2;
 
     public static Cube getInstance() {
         if (instance == null) {
@@ -110,6 +118,13 @@ public class Cube {
                         pointFragmentShader);
         mPerVertexProgramHandle = createAndLinkProgram(pointVertexShaderHandle,
                 pointFragmentShaderHandle, new String[]{"a_Position", "a_Color", "a_Normal"});
+
+        pointFragmentShaderHandle =
+                AdrenoGLRenderer.loadShader(GLES20.GL_FRAGMENT_SHADER,
+                        pointFragmentShader2);
+        mPerVertexProgramHandle2 =
+                createAndLinkProgram(pointVertexShaderHandle, pointFragmentShaderHandle,
+                        new String[]{"a_Position", "a_Color", "a_Normal"});
     }
 
     private int createAndLinkProgram(final int vertexShaderHandle, final int fragmentShaderHandle,
@@ -139,4 +154,9 @@ public class Cube {
     public FloatBuffer getmCubePositions() {
         return mCubePositions;
     }
+
+    public int getmPerVertexProgramHandle2() {
+        return mPerVertexProgramHandle2;
+    }
+
 }

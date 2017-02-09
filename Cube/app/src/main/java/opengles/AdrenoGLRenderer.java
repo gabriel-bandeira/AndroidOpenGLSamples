@@ -73,10 +73,17 @@ public class AdrenoGLRenderer implements GLSurfaceView.Renderer {
         float angleInDegrees = (360.0f / 10000.0f) * ((int) time);
         // Definindo posições e criando o primeiro cubo
         Matrix.setIdentityM(mModelMatrix, 0);
-        Matrix.translateM(mModelMatrix, 0, -4.0f, 0.0f, -7.0f);
+        Matrix.translateM(mModelMatrix, 0, -2.0f, 0.0f, -7.0f);
         Matrix.rotateM(mModelMatrix, 0, angleInDegrees, 0.0f, 1.0f, 0.0f);
         int mProgram = cubo.getmPerVertexProgramHandle();
 
+        drawCubo(mProgram);
+
+        // Definindo posições e criando o segundo cubo
+        Matrix.setIdentityM(mModelMatrix, 0);
+        Matrix.translateM(mModelMatrix, 0, 2.0f, 0.0f, -7.0f);
+        Matrix.rotateM(mModelMatrix, 0, angleInDegrees, 0.550f, 0.0f, 1.0f);
+        mProgram = cubo.getmPerVertexProgramHandle2();
         drawCubo(mProgram);
     }
 
